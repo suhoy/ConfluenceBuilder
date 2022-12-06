@@ -179,11 +179,10 @@ public class Main {
     public static String ReadTemplate(String Path) throws Exception {
         try {
             Reader in = new InputStreamReader(new FileInputStream(Path), StandardCharsets.UTF_8);
-
             return IOUtils.toString(in);
             // System.out.println("\nHtml: " + html);
         } catch (Exception ex) {
-
+            ex.getMessage();
             throw new Exception(ex.getMessage());
         }
     }

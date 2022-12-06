@@ -55,11 +55,11 @@ confluence.attachment.add=/rest/api/content/${page}/child/attachment
 </ac:structured-macro>
 <p><br></br></p>
 <h2>Графики</h2>
-<p><ac:image><ri:attachment ri:filename="example.png"></ri:attachment></ac:image></p>
-<p style="text-align: center;"><strong>Рисунок example.png</strong></p>
+<p><ac:image><ri:attachment ri:filename="cat.png"></ri:attachment></ac:image>
+<strong>cat </strong></p>
 <p><br></br></p>
-<p><ac:image><ri:attachment ri:filename="example2.png"></ri:attachment></ac:image></p>
-<p style="text-align: center;"><strong>Рисунок example2.png</strong></p>
+<p style="text-align: center;"><ac:image ac:align="center"><ri:attachment ri:filename="cat2.png"></ri:attachment></ac:image>
+<strong>centered cat</strong></p>
 <p><br></br></p>
 ```
 
