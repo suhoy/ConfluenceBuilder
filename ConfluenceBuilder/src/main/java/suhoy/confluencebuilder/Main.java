@@ -55,26 +55,26 @@ public class Main {
 
             //html
             if (!args.get("desc").isEmpty()) {
-                html = html.replace("${desc}", args.get("desc").get(0));
+                html = html.replace("${desc}", String.join(" ", args.get("desc")));
             }
 
             if (!args.get("build").isEmpty()) {
-                html = html.replace("${build}", args.get("build").get(0));
+                html = html.replace("${build}",  String.join(" ", args.get("build")));
             }
 
             if (!args.get("link").isEmpty()) {
-                html = html.replace("${link}", args.get("link").get(0));
+                html = html.replace("${link}", String.join(" ", args.get("link")));
             }
 
             if (!args.get("time").isEmpty()) {
-                html = html.replace("${time}", args.get("time").get(0));
+                html = html.replace("${time}", String.join(" ", args.get("time")));
             }
             //System.out.println("hrml=" + html);
 
             //читаем template
             json = ReadTemplate(args.get("json").get(0));
             json = json.replace("${html}", escape(html));
-            json = json.replace("${title}", args.get("title").get(0));
+            json = json.replace("${title}", String.join(" ", args.get("title")));
             json = json.replace("${space}", prop.getProperty("confluence.space"));
             json = json.replace("${parent}", args.get("parent").get(0));
 
