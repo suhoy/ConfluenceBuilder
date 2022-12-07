@@ -59,7 +59,7 @@ public class Main {
             }
 
             if (!args.get("build").isEmpty()) {
-                html = html.replace("${build}",  String.join(" ", args.get("build")));
+                html = html.replace("${build}", String.join(" ", args.get("build")));
             }
 
             if (!args.get("link").isEmpty()) {
@@ -115,37 +115,40 @@ public class Main {
             if (!args.get("graphs").isEmpty()) {
                 String graphpath = args.get("graphs").get(0);
                 for (String graph : graphs) {
-                    String name = graph.split("\"")[1];
-                    String path = graphpath + "\\" + name;
+                    try {
+                        String name = graph.split("\"")[1];
+                        String path = graphpath + "\\" + name;
 
-                    //MultipartEntityBuilder multipartEntity = MultipartEntityBuilder.create()
-                    HttpEntity entityPhoto = MultipartEntityBuilder.create()
-                            .setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
-                            .setBoundary(boundary)
-                            .addTextBody("minorEdit", "true")
-                            .addBinaryBody("file", new File(path), ContentType.APPLICATION_OCTET_STREAM, name)
-                            .build();
+                        //MultipartEntityBuilder multipartEntity = MultipartEntityBuilder.create()
+                        HttpEntity entityPhoto = MultipartEntityBuilder.create()
+                                .setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
+                                .setBoundary(boundary)
+                                .addTextBody("minorEdit", "true")
+                                .addBinaryBody("file", new File(path), ContentType.APPLICATION_OCTET_STREAM, name)
+                                .build();
 
 //1
-                    //multipartEntity.addPart("file", new FileBody(new File(path)));
+                        //multipartEntity.addPart("file", new FileBody(new File(path)));
 //2
-                    //multipartEntity.addBinaryBody("file", new File(path), ContentType.APPLICATION_OCTET_STREAM, name);
+                        //multipartEntity.addBinaryBody("file", new File(path), ContentType.APPLICATION_OCTET_STREAM, name);
 //3
-                    //InputStream inputStream = new FileInputStream(new File(path));
-                    //byte[] data = IOUtils.toByteArray(inputStream);
-                    //multipartEntity.addBinaryBody("file", data);
+                        //InputStream inputStream = new FileInputStream(new File(path));
+                        //byte[] data = IOUtils.toByteArray(inputStream);
+                        //multipartEntity.addBinaryBody("file", data);
 //4
-                    //InputStream inputStream = new FileInputStream(new File(path));
-                    //byte[] data = IOUtils.toByteArray(inputStream);
-                    //InputStreamBody inputStreamBody = new InputStreamBody(new ByteArrayInputStream(data), name);
-                    //multipartEntity.addPart("file", inputStreamBody);
-                    //HttpEntity entityPhoto = multipartEntity.build();
-                    httpPostPhoto.setEntity(entityPhoto);
-                    HttpResponse responsePhoto = httpclientPhoto.execute(httpPostPhoto);
+                        //InputStream inputStream = new FileInputStream(new File(path));
+                        //byte[] data = IOUtils.toByteArray(inputStream);
+                        //InputStreamBody inputStreamBody = new InputStreamBody(new ByteArrayInputStream(data), name);
+                        //multipartEntity.addPart("file", inputStreamBody);
+                        //HttpEntity entityPhoto = multipartEntity.build();
+                        httpPostPhoto.setEntity(entityPhoto);
+                        HttpResponse responsePhoto = httpclientPhoto.execute(httpPostPhoto);
 
-                    System.out.println("Sending " + name + " :\t" + httpPostPhoto.getRequestLine());
-                    System.out.println("Response :\t\t" + responsePhoto.getStatusLine() + " " + EntityUtils.toString(responsePhoto.getEntity(), StandardCharsets.UTF_8));
-
+                        System.out.println("Sending " + name + " :\t" + httpPostPhoto.getRequestLine());
+                        System.out.println("Response :\t\t" + responsePhoto.getStatusLine() + " " + EntityUtils.toString(responsePhoto.getEntity(), StandardCharsets.UTF_8));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
