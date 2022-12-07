@@ -117,7 +117,7 @@ public class Main {
                 for (String graph : graphs) {
                     try {
                         String name = graph.split("\"")[1];
-                        String path = graphpath + "\\" + name;
+                        String path = graphpath + "/" + name;
 
                         //MultipartEntityBuilder multipartEntity = MultipartEntityBuilder.create()
                         HttpEntity entityPhoto = MultipartEntityBuilder.create()
