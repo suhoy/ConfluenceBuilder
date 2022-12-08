@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URLEncoder;
 import org.apache.commons.io.IOUtils;
 import org.apache.hc.client5.http.methods.HttpPost;
 import org.apache.hc.core5.http.HttpEntity;
@@ -144,14 +145,14 @@ public class Main {
                         httpPostPhoto.setEntity(entityPhoto);
                         HttpResponse responsePhoto = httpclientPhoto.execute(httpPostPhoto);
 
-                        System.out.println("Sending " + name + " :\t" + httpPostPhoto.getRequestLine());
-                        System.out.println("Response :\t\t" + responsePhoto.getStatusLine() + " " + EntityUtils.toString(responsePhoto.getEntity(), StandardCharsets.UTF_8));
+                        System.out.println("Sending " + name + " : " + httpPostPhoto.getRequestLine());
+                        System.out.println("Response : " + responsePhoto.getStatusLine() + " " + EntityUtils.toString(responsePhoto.getEntity(), StandardCharsets.UTF_8));
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 }
             }
-
+            System.out.println("Page created: " + prop.getProperty("confluence.url") + "/display/" + prop.getProperty("confluence.space") + "/" + URLEncoder.encode((String.join(" ", args.get("title"))), StandardCharsets.UTF_8.toString()));
             System.out.println("\n========== ConfluenceBuilder finished ==========");
             System.exit(0);
         } catch (Exception ex) {
